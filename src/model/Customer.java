@@ -15,7 +15,7 @@ public class Customer {
         this.lastName = lName;
         String emailRegex = "^(.+)@(.+).(.+)$";
         Pattern pattern = Pattern.compile(emailRegex);
-        if(pattern.matcher(email).matches()){
+        if(!pattern.matcher(email).matches()){
                 throw new IllegalArgumentException("The email provided is incorrect!");
             }
         this.email = email;

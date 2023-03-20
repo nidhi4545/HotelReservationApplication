@@ -46,8 +46,8 @@ public class Reservation {
     public String toString(){
         return "Reservation Details: \n" +
                 "Name: "+getCustomer().getFirstName()+getCustomer().getLastName()+"\n"+
-                "Room: "+getRoom().getRoomNumber()+" - "+getRoom().getRoomType()+"\n "+
-                "Price: $"+getRoom().getRoomPrice()+"per night\n"+
+                "Room: "+getRoom().getRoomNumber()+" - "+getRoom().getRoomType()+"\n"+
+                "Price: $"+getRoom().getRoomPrice()+" per night\n"+
                 "Check In Date: "+getCheckInDate()+"\n"+
                 "Check Out Date: "+getCheckOutDate();
     }

@@ -58,6 +58,7 @@ public class MainMenuPractice {
  */
 
         System.out.println("Please enter the location that you would like to travel to: ");
+        scan.skip("\\R?");
         String location = scan.nextLine();
         SimpleDateFormat Default_Date_Format = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println("Please enter the Check-In date: (format: mm/dd/yyyy");
@@ -99,7 +100,8 @@ public class MainMenuPractice {
         String userRegisteredEmail = "";
         Customer customer;
         if(userResponse == 'y'){
-            System.out.println("Please enter the registered email:");
+            System.out.println("Please enter the registered email: ");
+            scan.skip("\\R?");
             userRegisteredEmail = scan.nextLine();
            if(HotelResource.getCustomer(userRegisteredEmail) == null){
                System.out.println("The entered email is not registered with us. Please create an account to proceed further");
@@ -109,13 +111,13 @@ public class MainMenuPractice {
         }else if(userResponse == 'n'){
             System.out.println("Please create an account before proceeding.");
             userRegisteredEmail = createAnAccount(scan);
-            }
+        }
 
         System.out.println("Please let us know the room number of your choice: ");
         assert availableRooms != null;
         printRooms(availableRooms);
         String userRoomNumberChoice = scan.nextLine();
-            if(availableRooms.stream().allMatch(room -> room.getRoomNumber().equals(userRoomNumberChoice))) {
+            if(availableRooms.stream().anyMatch(room -> room.getRoomNumber().equals(userRoomNumberChoice))) {
                 IRoom room = HotelResource.getRoom(userRoomNumberChoice);
                 Reservation reservation = HotelResource.reserveARoom(userRegisteredEmail, room, checkInCheckOutDates[0], checkInCheckOutDates[1]);
                 System.out.println("Your room has been reserved! Please see the details: ");
@@ -147,6 +149,7 @@ public class MainMenuPractice {
 
     public static void seeMyReservation(Scanner scan){
         System.out.println("To check your reservation, please enter the email registered with us: ");
+        scan.skip("\\R?");
         String userEnteredEmail = scan.nextLine();
         if(HotelResource.getCustomer(userEnteredEmail) != null){
             for(Reservation reservation : HotelResource.getCustomersReservations(userEnteredEmail)){
@@ -159,6 +162,7 @@ public class MainMenuPractice {
 
     public static String createAnAccount(Scanner scan){
         System.out.println("Please enter your first name: ");
+        scan.skip("\\R?");
         String firstName = scan.nextLine();
         System.out.println("Please enter your last name: ");
         String lastName = scan.nextLine();
